@@ -17,6 +17,8 @@ For more information about the INA226 please consult the [data sheet from Texas 
 
 ## Installation
 
+Make sure you are using Node.js v4.5.0 or higher.
+
 ```
 npm install ina226
 ```
@@ -153,6 +155,24 @@ calcPower(busVoltage?:number, shuntVoltage?:number):number
 Calculates the power in Watt based on the bus voltage, the shunt voltage and the shunt resistance value.
 * `busVoltage` - *Optional.* The bus voltage which is used for the calculation. Defaults to the last read bus voltage.
 * `shuntVoltage` - *Optional.* The shunt voltage which is used for the calculation. Defaults to the last read shunt voltage.
+
+### Exported constants
+
+The register addresses are exported as constants.
+
+| Constant | Value |
+|---|---|
+| CONFIGURATION_REGISTER | 0x00 |
+| SHUNT_VOLTAGE_REGISTER | 0x01 |
+| BUS_VOLTAGE_REGISTER | 0x02 |
+| POWER_REGISTER | 0x03 |
+| CURRENT_REGISTER | 0x04 |
+| CALIBRATION_REGISTER | 0x05 |
+| MASK_ENABLE_REGISTER | 0x06 |
+| ALERT_LIMIT_REGISTER | 0x07 |
+| MANUFACTOR_ID_REGISTER | 0xFE |
+| DIE_ID_REGISTER | 0xFF |
+
 
 
 ## License
