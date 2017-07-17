@@ -1,0 +1,37 @@
+image: crycode/nodejs-dev-env
+
+stages:
+  - build
+  - deploy
+
+cache:
+  paths:
+    - node_modules/
+
+typescript-build:
+  stage: build
+  artifacts:
+    expire_in: 1 week
+    name: "typescript-build-${CI_COMMIT_SHA:0:8}"
+    paths:
+      - dist/
+  script:
+    - npm config set unsafe-perm true
+    - npm install @types/bluebird@^3.5.8
+    - npm install @types/i2c-bus@^1.0.9
+    - npm install @types/node@^4.2.4
+    - tsc
+    - tsc --noEmit --lib es6 examples/*.ts
+
+publish-to-npm:
+  stage: deploy
+  script:
+    - npm config set unsafe-perm true
+    - npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+    - npm publish
+  environment:
+    name: production
+    url: https://www.npmjs.com/package/ina226
+  when: manual
+  only:
+    - tags

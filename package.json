@@ -1,0 +1,36 @@
+{
+  "name": "ina226",
+  "version": "1.0.0",
+  "description": "Node.js module to read values from the INA226 bi-directional current and power monitor.",
+  "main": "dist/ina226.js",
+  "typings": "dist/ina226.d.ts",
+  "scripts": {
+    "prepublish": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ina226",
+    "power monitor",
+    "current monitor"
+  ],
+  "author": "Peter Müller <peter@crycode.de> (https://crycode.de)",
+  "license": "GPL-2.0",
+  "homepage": "https://git.cryhost.de/crycode/node-ina226",
+  "repository": {
+    "type": "git",
+    "url": "https://git.cryhost.de/crycode/node-ina226.git"
+  },
+  "bugs": {
+    "url": "https://git.cryhost.de/crycode/node-ina226/issues"
+  },
+  "devDependencies": {
+    "@types/bluebird": "^3.5.8",
+    "@types/i2c-bus": "^1.0.9",
+    "@types/node": "^8.0.12",
+    "typescript": "^2.4.1"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "i2c-bus": "^1.2.2"
+  }
+}
