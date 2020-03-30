@@ -1,7 +1,7 @@
 /*
  * Node.js module ina226
  *
- * Copyright (c) 2017 Peter Müller <peter@crycode.de> (https://crycode.de/)
+ * Copyright (c) 2017-2020 Peter Müller <peter@crycode.de> (https://crycode.de/)
  *
  * Node.js module to read values from the INA226 bi-directional current and power monitor.
  *
@@ -14,8 +14,8 @@
 import {INA226, CONFIGURATION_REGISTER} from '../';
 
 // Import the i2c-bus module and open the bus
-import {I2cBus, openSync as I2cBusOpenSync} from 'i2c-bus';
-const i2cBus:I2cBus = I2cBusOpenSync(1);
+import {I2CBus, openSync as I2cBusOpenSync} from 'i2c-bus';
+const i2cBus:I2CBus = I2cBusOpenSync(1);
 
 
 // Define the address of the INA226 and the shunt resistance value
