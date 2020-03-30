@@ -1,4 +1,4 @@
-image: crycode/nodejs-dev-env
+image: registry.cryhost.de/cryhost/node-dev:12
 
 stages:
   - build
@@ -19,7 +19,7 @@ typescript-build:
     - npm config set unsafe-perm true
     - npm install @types/bluebird@^3.5.8
     - npm install @types/i2c-bus@^1.0.9
-    - npm install @types/node@^6.0.0
+    - npm install @types/node@^12.0.0
     - tsc
     - tsc --noEmit --lib es6 examples/*.ts
 
