@@ -126,7 +126,7 @@ export class INA226 {
     buf[1] = value & 0xff;
 
     return new Promise<number>((resolve:()=>void, reject:(err:Error)=>void)=>{
-      this._i2cBus.writeI2cBlock(this._address, register, 2, buf, (err:any, bytesWritten:number, buffer:Buffer)=>{
+      this._i2cBus.writeI2cBlock(this._address, register, 2, buf, (err:any, _bytesWritten:number, _buffer:Buffer)=>{
         if(err){
           reject(err);
         }else{
@@ -146,7 +146,7 @@ export class INA226 {
     let buf = Buffer.alloc(2);
 
     return new Promise<number>((resolve:(bytesWritten:number)=>void, reject:(err:Error)=>void)=>{
-      this._i2cBus.readI2cBlock(this._address, register, 2, buf, (err:any, bytesRead:number, buffer:Buffer)=>{
+      this._i2cBus.readI2cBlock(this._address, register, 2, buf, (err:any, _bytesRead:number, buffer:Buffer)=>{
         if(err){
           reject(err);
         }else{
