@@ -16,17 +16,13 @@ typescript-build:
     paths:
       - dist/
   script:
-    - npm config set unsafe-perm true
-    - npm install @types/bluebird@^3.5.8
-    - npm install @types/i2c-bus@^1.0.9
-    - npm install @types/node@^12.0.0
+    - npm ci
     - tsc
     - tsc --noEmit --lib es6 examples/*.ts
 
 publish-to-npm:
   stage: deploy
   script:
-    - npm config set unsafe-perm true
     - npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
     - npm publish
   environment:

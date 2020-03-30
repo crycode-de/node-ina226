@@ -17,7 +17,7 @@ For more information about the INA226 please consult the [data sheet from Texas 
 
 ## Installation
 
-Make sure you are using Node.js v4.5.0 or higher.
+Make sure you are using Node.js v6.0.0 or higher.
 
 ```
 npm install ina226
@@ -179,4 +179,4 @@ The register addresses are exported as constants.
 
 Licensed under GPL Version 2
 
-Copyright (c) 2017 Peter Müller <peter@crycode.de> (https://crycode.de/)
+Copyright (c) 2017-2020 Peter Müller <peter@crycode.de> (https://crycode.de/)

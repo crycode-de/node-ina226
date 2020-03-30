@@ -1,14 +1,13 @@
 /*
  * Node.js module ina226
  *
- * Copyright (c) 2017 Peter Müller <peter@crycode.de> (https://crycode.de/)
+ * Copyright (c) 2017-2020 Peter Müller <peter@crycode.de> (https://crycode.de/)
  *
  * Node.js module to read values from the INA226 bi-directional current and power monitor.
  */
 /// <reference types="node" />
 
-import * as Promise from 'bluebird';
-import {I2cBus} from 'i2c-bus';
+import { I2CBus } from 'i2c-bus';
 
 /**
  * Address of the Configuration Register.
@@ -75,31 +74,31 @@ export class INA226 {
    * Instance of the used i2c-bus object.
    * @type {I2cBus}
    */
-  private _i2cBus:I2cBus;
+  private _i2cBus: I2CBus;
 
   /**
    * The address of the INA226 IC.
    * @type {number}
    */
-  private _address:number;
+  private _address: number;
 
   /**
    * The shunt resistance value in Ohm.
    * @type {number}
    */
-  private _rShunt:number;
+  private _rShunt: number;
 
   /**
    * Last read bus voltage.
    * @type {number}
    */
-  private _busVoltage:number = 0;
+  private _busVoltage: number = 0;
 
   /**
    * Last read shunt voltage.
    * @type {number}
    */
-  private _shuntVoltage:number = 0;
+  private _shuntVoltage: number = 0;
 
   /**
    * Constructor for the power monitor INA226.
@@ -107,7 +106,7 @@ export class INA226 {
    * @param  {number} address The address of the INA226 IC.
    * @param  {number} rShunt  The shunt resistance value. Defaults to 0.1 Ohm.
    */
-  constructor(i2cBus:I2cBus, address:number, rShunt:number=0.1){
+  constructor(i2cBus: I2CBus, address: number, rShunt: number = 0.1){
     this._i2cBus = i2cBus;
     this._address = address;
     this._rShunt = rShunt;
@@ -120,13 +119,13 @@ export class INA226 {
    * @param  {number}  value    The value. Should be 16bit integer.
    * @return {Promise}
    */
-  public writeRegister(register:number, value:number):Promise<{}>{
+  public writeRegister(register: number, value: number): Promise<{}>{
     let buf = Buffer.alloc(2);
     buf[0] = (value >> 8) & 0xff;
     buf[1] = value & 0xff;
 
-    return new Promise<number>((resolve:()=>void, reject:(err:Error)=>void)=>{
-      this._i2cBus.writeI2cBlock(this._address, register, 2, buf, (err:any, _bytesWritten:number, _buffer:Buffer)=>{
+    return new Promise<number>((resolve: ()=>void, reject: (err: Error)=>void)=>{
+      this._i2cBus.writeI2cBlock(this._address, register, 2, buf, (err: any, _bytesWritten: number, _buffer: Buffer)=>{
         if(err){
           reject(err);
         }else{
@@ -142,11 +141,11 @@ export class INA226 {
    * @param  {number}          register The register address.
    * @return {Promise<number>}
    */
-  public readRegister(register:number):Promise<number>{
+  public readRegister(register: number): Promise<number>{
     let buf = Buffer.alloc(2);
 
-    return new Promise<number>((resolve:(bytesWritten:number)=>void, reject:(err:Error)=>void)=>{
-      this._i2cBus.readI2cBlock(this._address, register, 2, buf, (err:any, _bytesRead:number, buffer:Buffer)=>{
+    return new Promise<number>((resolve: (bytesWritten: number)=>void, reject: (err: Error)=>void)=>{
+      this._i2cBus.readI2cBlock(this._address, register, 2, buf, (err: any, _bytesRead: number, buffer: Buffer)=>{
         if(err){
           reject(err);
         }else{
@@ -162,9 +161,9 @@ export class INA226 {
    * Returns a Promise which will be resolved with the bus voltage, or rejected in case of an error.
    * @return {Promise<number>}
    */
-  public readBusVoltage():Promise<number>{
+  public readBusVoltage(): Promise<number>{
     return this.readRegister(BUS_VOLTAGE_REGISTER)
-      .then<number>((busVoltage:number)=>{
+      .then<number>((busVoltage: number)=>{
         this._busVoltage = busVoltage * BUS_VOLTAGE_LSB;
         return this._busVoltage;
       });
@@ -175,9 +174,9 @@ export class INA226 {
    * Returns a Promise which will be resolved with the shunt voltage, or rejected in case of an error.
    * @return {Promise<number>}
    */
-  public readShuntVoltage():Promise<number>{
+  public readShuntVoltage(): Promise<number>{
     return this.readRegister(SHUNT_VOLTAGE_REGISTER)
-      .then<number>((shuntVoltage:number)=>{
+      .then<number>((shuntVoltage: number)=>{
         // Negative numbers are represented in two's complement format.
         // Generate the two's complement of a negative number by complementing
         // the absolute value binary number and adding 1.
@@ -198,7 +197,7 @@ export class INA226 {
    * @param  {number} shuntVoltage Optional. The shunt voltage which is used for the calculation. Defaults to the last read shunt voltage.
    * @return {number} The calculated current in Ampere.
    */
-  public calcCurrent(shuntVoltage:number = this._shuntVoltage):number{
+  public calcCurrent(shuntVoltage: number = this._shuntVoltage): number{
     return shuntVoltage / this._rShunt;
   }
 
@@ -208,7 +207,7 @@ export class INA226 {
    * @param  {number} shuntVoltage Optional. The shunt voltage which is used for the calculation. Defaults to the last read shunt voltage.
    * @return {number} The calculated power in Watt.
    */
-  public calcPower(busVoltage:number = this._busVoltage, shuntVoltage:number = this._shuntVoltage):number{
+  public calcPower(busVoltage: number = this._busVoltage, shuntVoltage: number = this._shuntVoltage): number{
     return busVoltage * shuntVoltage / this._rShunt;
   }
 }
