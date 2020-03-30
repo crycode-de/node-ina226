@@ -184,8 +184,8 @@ export class INA226 {
         // An MSB = '1' denotes a negative number.
         // (datasheet page 24)
         if(shuntVoltage & 0x8000){
-          shuntVoltage = ~shuntVoltage; // invert bits
-          shuntVoltage += 1; // add 1
+          shuntVoltage -= 1; // subtract 1
+          shuntVoltage ^= 0xFFFF; // invert bits
           shuntVoltage *= -1; // negate
         }
         this._shuntVoltage = shuntVoltage * SHUNT_VOLTAGE_LSB;
