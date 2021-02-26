@@ -18,7 +18,7 @@
     "current monitor"
   ],
   "author": "Peter Müller <peter@crycode.de> (https://crycode.de)",
-  "license": "GPL-2.0",
+  "license": "CC-BY-NC-SA-4.0",
   "homepage": "https://git.cryhost.de/crycode/node-ina226",
   "repository": {
     "type": "git",

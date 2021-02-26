@@ -177,6 +177,6 @@ The register addresses are exported as constants.
 
 ## License
 
-Licensed under GPL Version 2
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 
-Copyright (c) 2017-2020 Peter Müller <peter@crycode.de> (https://crycode.de/)
+Copyright (c) 2017-2021 Peter Müller <peter@crycode.de> (https://crycode.de/)
