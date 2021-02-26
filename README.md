@@ -1,7 +1,9 @@
 # ina226
 
-[![npm version](https://badge.fury.io/js/ina226.svg)](https://badge.fury.io/js/ina226)
-[![build status](https://git.cryhost.de/crycode/node-ina226/badges/master/build.svg)](https://git.cryhost.de/crycode/node-ina226/commits/master)
+[![NPM version](https://img.shields.io/npm/v/ina226.svg)](https://www.npmjs.com/package/ina226)
+[![Downloads](https://img.shields.io/npm/dm/ina226.svg)](https://www.npmjs.com/package/iina226)
+
+[![NPM](https://nodei.co/npm/ina226.png?downloads=true)](https://nodei.co/npm/ina226/)
 
 Node.js module to read values from the INA226 bi-directional current and power monitor.
 
@@ -73,7 +75,7 @@ ina.readShuntVoltage()
   console.log('Current: ' + current.toFixed(2) + 'A');
 })
 
-// Then read the actual bus voltage and calulate the power
+// Then read the actual bus voltage and calculate the power
 .then(ina.readBusVoltage.bind(ina))
 .then(function(){
   var power = ina.calcPower();
@@ -179,4 +181,4 @@ The register addresses are exported as constants.
 
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 
-Copyright (c) 2017-2021 Peter Müller <peter@crycode.de> (https://crycode.de/)
+Copyright (c) 2017-2021 Peter Müller <peter@crycode.de> [https://crycode.de/](https://crycode.de/)

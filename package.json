@@ -17,15 +17,19 @@
     "power monitor",
     "current monitor"
   ],
-  "author": "Peter Müller <peter@crycode.de> (https://crycode.de)",
+  "author": {
+    "name": "Peter Müller",
+    "email": "peter@crycode.de",
+    "url": "https://crycode.de"
+  },
   "license": "CC-BY-NC-SA-4.0",
-  "homepage": "https://git.cryhost.de/crycode/node-ina226",
+  "homepage": "https://github.com/crycode-de/node-ina226",
   "repository": {
     "type": "git",
-    "url": "https://git.cryhost.de/crycode/node-ina226.git"
+    "url": "https://github.com/crycode-de/node-ina226.git"
   },
   "bugs": {
-    "url": "https://git.cryhost.de/crycode/node-ina226/issues"
+    "url": "https://github.com/crycode-de/node-ina226/issues"
   },
   "devDependencies": {
     "@types/i2c-bus": "^5.1.0",
