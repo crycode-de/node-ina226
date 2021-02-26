@@ -17,7 +17,7 @@ For more information about the INA226 please consult the [data sheet from Texas 
 
 ## Installation
 
-Make sure you are using Node.js v6.0.0 or higher.
+Make sure you are using Node.js v8.x or higher.
 
 ```
 npm install ina226
