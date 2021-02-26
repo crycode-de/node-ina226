@@ -32,7 +32,7 @@ This module is written in TypeScript and typings are included.
 
 Note that you need to construct the [i2c-bus](https://npmjs.org/package/i2c-bus) object and pass it in to the INA226 class.
 
-The example blow can be found in the [examples directory](https://git.cryhost.de/crycode/node-ina226/tree/master/examples) of this package together with a TypeScript example.
+The example blow can be found in the [examples directory](https://github.com/crycode-de/node-ina226/tree/main/examples) of this package together with a TypeScript example.
 
 
 ```js
