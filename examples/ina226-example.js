@@ -1,7 +1,7 @@
 /*
  * Node.js module ina226
  *
- * Copyright (c) 2017 Peter Müller <peter@crycode.de> (https://crycode.de/)
+ * Copyright (c) 2017-2021 Peter Müller <peter@crycode.de> (https://crycode.de/)
  *
  * Node.js module to read values from the INA226 bi-directional current and power monitor.
  *
@@ -51,7 +51,7 @@ ina.readShuntVoltage()
   console.log('Current: ' + current.toFixed(2) + 'A');
 })
 
-// Then read the actual bus voltage and calulate the power
+// Then read the actual bus voltage and calculate the power
 .then(ina.readBusVoltage.bind(ina))
 .then(function(){
   var power = ina.calcPower();

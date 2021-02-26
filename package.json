@@ -5,7 +5,7 @@
   "main": "dist/ina226.js",
   "typings": "dist/ina226.d.ts",
   "scripts": {
-    "prepublish": "tsc",
+    "build": "tsc",
     "lint": "eslint --ext .ts src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
