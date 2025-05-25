@@ -23,7 +23,36 @@ export default tseslint.config(
     },
 
     rules: {
+      '@typescript-eslint/naming-convention': 'off',
       '@typescript-eslint/promise-function-async': 'off',
+    },
+  },
+
+  /**
+   * Special rules for the examples
+   */
+  {
+    files: [
+      'examples/**/*',
+    ],
+    languageOptions: {
+      globals: {
+        console: true,
+        require: true, // needed for js example
+      },
+    },
+    rules: {
+      '@typescript-eslint/no-require-imports': 'off',
+      'no-console': 'off',
+      '@stylistic/operator-linebreak': 'off',
+    },
+  },
+  {
+    files: [
+      'examples/**/*.js',
+    ],
+    rules: {
+      '@typescript-eslint/explicit-function-return-type': 'off',
     },
   },
 );

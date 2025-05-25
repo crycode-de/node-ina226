@@ -58,6 +58,48 @@ export const MANUFACTOR_ID_REGISTER = 0xFE;
  */
 export const DIE_ID_REGISTER = 0xFF;
 
+/**
+ * Averaging modes for the INA226 to be used in the {@link CONFIGURATION_REGISTER}.
+ */
+export enum CONFIG_AVERAGING {
+  AVG1 = 0,
+  AVG4 = 1,
+  AVG16 = 2,
+  AVG64 = 3,
+  AVG128 = 4,
+  AVG256 = 5,
+  AVG512 = 6,
+  AVG1024 = 7,
+}
+
+/**
+ * Conversion times for the INA226 to be used in the {@link CONFIGURATION_REGISTER}.
+ */
+export enum CONFIG_CONVERSION_TIME {
+  CT_140us = 0,
+  CT_204us = 1,
+  CT_332us = 2,
+  CT_588us = 3,
+  CT_1_1ms = 4,
+  CT_2_116ms = 5,
+  CT_4_156ms = 6,
+  CT_8_244ms = 7,
+}
+
+/**
+ * Operating modes for the INA226 to be used in the {@link CONFIGURATION_REGISTER}.
+ */
+export enum CONFIG_MODE {
+  POWER_DOWN_OR_SHUTDOWN_1 = 0b000,
+  SHUNT_VOLTAGE_TRIGGERED = 0b001,
+  BUS_VOLTAGE_TRIGGERED = 0b010,
+  SHUNT_AND_BUS_VOLTAGE_TRIGGERED = 0b011,
+  POWER_DOWN_OR_SHUTDOWN_2 = 0b100,
+  SHUNT_VOLTAGE_CONTINUOUS = 0b101,
+  BUS_VOLTAGE_CONTINUOUS = 0b110,
+  SHUNT_AND_BUS_VOLTAGE_CONTINUOUS = 0b111,
+}
+
 const SHUNT_VOLTAGE_LSB = 0.0000025; // 2.5µV
 const BUS_VOLTAGE_LSB = 0.00125; // 1.25mV
 

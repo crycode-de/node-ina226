@@ -7,14 +7,15 @@
 *
 * Example
 */
-/* eslint-disable @typescript-eslint/no-require-imports */
 
 // Require the ina226 module
-// const INA226 = require('ina226').INA226;
-const INA226 = require('../').INA226;
-
-// const CONFIGURATION_REGISTER = require('ina226').CONFIGURATION_REGISTER;
-const CONFIGURATION_REGISTER = require('../').CONFIGURATION_REGISTER;
+const {
+  CONFIG_AVERAGING,
+  CONFIG_CONVERSION_TIME,
+  CONFIG_MODE,
+  CONFIGURATION_REGISTER,
+  INA226,
+} = require('../'); // = require('ina226');
 
 // Require the i2c-bus module and open the bus
 const i2cBus = require('i2c-bus').openSync(1);
@@ -23,38 +24,42 @@ const i2cBus = require('i2c-bus').openSync(1);
 const addr = 0x40;
 const rShunt = 0.1;
 
-// Init a new INA226
-const ina = new INA226(i2cBus, addr, rShunt);
+/**
+ * Main function to demonstrate the INA226 usage in an async context.
+ */
+async function main () {
+  // Init a new INA226
+  const ina = new INA226(i2cBus, addr, rShunt);
 
-// Write to the Configuration Register
-// 0x4427 means 16 averages, 1.1ms conversion time, shunt and bus continuous
-ina.writeRegister(CONFIGURATION_REGISTER, 0x4427)
-.then(function(){
+  // Write to the Configuration Register (0x4527 in this example)
+  const configValue =
+    (0b0100 << 12) // Bits 15 - 12, Reset 0 and rest is unused constant
+    | (CONFIG_AVERAGING.AVG16 << 9) // Bits 11 - 9, Averaging
+    | (CONFIG_CONVERSION_TIME.CT_1_1ms << 6) // Bits 8 - 6, Bus Voltage Conversion Time
+    | (CONFIG_CONVERSION_TIME.CT_1_1ms << 3) // Bits 5 - 3, Shunt Voltage Conversion Time
+    | (CONFIG_MODE.SHUNT_AND_BUS_VOLTAGE_CONTINUOUS << 0); // Bits 2 - 0, Operating Mode
+  await ina.writeRegister(CONFIGURATION_REGISTER, configValue);
   console.log('Configuration written');
-});
 
-// Read the actual bus voltage
-ina.readBusVoltage()
-.then(function(busVoltage){
-  console.log('Bus Voltage: ' + busVoltage.toFixed(2) + 'V');
-});
+  // Read the actual bus voltage
+  const busVoltage = await ina.readBusVoltage();
+  console.log(`Bus Voltage: ${busVoltage.toFixed(2)}V`);
 
-// Read the actual shunt voltage
-ina.readShuntVoltage()
-.then(function(shuntVoltage){
-  console.log('Shunt Voltage: ' + shuntVoltage.toFixed(5) + 'V');
-});
+  // Read the actual shunt voltage
+  const shuntVoltage = await ina.readShuntVoltage();
+  console.log(`Shunt Voltage: ${shuntVoltage.toFixed(5)}V`);
 
-// Read the actual shunt voltage and calculate the current
-ina.readShuntVoltage()
-.then(function(){
+  // Read the actual shunt voltage and calculate the current
+  await ina.readShuntVoltage();
   const current = ina.calcCurrent();
-  console.log('Current: ' + current.toFixed(2) + 'A');
-})
+  console.log(`Current: ${current.toFixed(2)}A`);
 
-// Then read the actual bus voltage and calculate the power
-.then(ina.readBusVoltage.bind(ina))
-.then(function(){
+  // Read the actual shunt and bus voltages and calculate the power
+  await ina.readShuntVoltage();
+  await ina.readBusVoltage();
   const power = ina.calcPower();
-  console.log('Power: ' + power.toFixed(2) + 'W');
-});
+  console.log(`Power: ${power.toFixed(2)}W`);
+}
+
+// Call the main function
+void main();
