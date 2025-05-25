@@ -4,8 +4,7 @@
   Placeholder for the next version (at the beginning of the line):
   ## **WORK IN PROGRESS**
 -->
-
-## **WORK IN PROGRESS**
+## 3.1.1 (2025-05-25)
 
 - Updated dependencies
 - Added exported enums for `CONFIG_AVERAGING`, `CONFIG_CONVERSION_TIME` and `CONFIG_MODE`

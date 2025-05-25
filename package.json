@@ -1,6 +1,6 @@
 {
   "name": "ina226",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Node.js module to read values from the INA226 bi-directional current and power monitor.",
   "main": "dist/ina226.js",
   "typings": "dist/ina226.d.ts",
