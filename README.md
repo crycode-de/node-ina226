@@ -185,6 +185,8 @@ The register addresses are exported as constants.
 | MANUFACTOR_ID_REGISTER | 0xFE |
 | DIE_ID_REGISTER | 0xFF |
 
+Also the enums `CONFIG_AVERAGING`, `CONFIG_CONVERSION_TIME` and  `CONFIG_MODE` are exported to allow easier calculations of the configuration register value. See the examples for details on how to use them.
+
 ## License
 
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
