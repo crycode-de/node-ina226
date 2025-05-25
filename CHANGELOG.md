@@ -5,7 +5,7 @@
   ## **WORK IN PROGRESS**
 -->
 
-## 3.1.0 (2025-05-25)
+## **WORK IN PROGRESS**
 
 - Updated dependencies
 - Added exported enums for `CONFIG_AVERAGING`, `CONFIG_CONVERSION_TIME` and `CONFIG_MODE`
