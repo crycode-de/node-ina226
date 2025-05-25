@@ -1,8 +1,0 @@
-node_modules/
-*.log
-*.tgz
-.github
-examples
-src
-.eslintrc.js
-tsconfig.json

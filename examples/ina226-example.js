@@ -1,29 +1,30 @@
 /*
- * Node.js module ina226
- *
- * Copyright (c) 2017-2021 Peter Müller <peter@crycode.de> (https://crycode.de/)
- *
- * Node.js module to read values from the INA226 bi-directional current and power monitor.
- *
- * Example
- */
+* Node.js module ina226
+*
+* Copyright (c) 2017-2025 Peter Müller <peter@crycode.de> (https://crycode.de/)
+*
+* Node.js module to read values from the INA226 bi-directional current and power monitor.
+*
+* Example
+*/
+/* eslint-disable @typescript-eslint/no-require-imports */
 
 // Require the ina226 module
-//var INA226 = require('ina226').INA226;
-var INA226 = require('../').INA226;
+// const INA226 = require('ina226').INA226;
+const INA226 = require('../').INA226;
 
-//var CONFIGURATION_REGISTER = require('ina226').CONFIGURATION_REGISTER;
-var CONFIGURATION_REGISTER = require('../').CONFIGURATION_REGISTER;
+// const CONFIGURATION_REGISTER = require('ina226').CONFIGURATION_REGISTER;
+const CONFIGURATION_REGISTER = require('../').CONFIGURATION_REGISTER;
 
 // Require the i2c-bus module and open the bus
-var i2cBus = require('i2c-bus').openSync(1);
+const i2cBus = require('i2c-bus').openSync(1);
 
 // Define the address of the INA226 and the shunt resistance value
-var addr = 0x40;
-var rShunt = 0.1;
+const addr = 0x40;
+const rShunt = 0.1;
 
 // Init a new INA226
-var ina = new INA226(i2cBus, addr, rShunt);
+const ina = new INA226(i2cBus, addr, rShunt);
 
 // Write to the Configuration Register
 // 0x4427 means 16 averages, 1.1ms conversion time, shunt and bus continuous
@@ -47,13 +48,13 @@ ina.readShuntVoltage()
 // Read the actual shunt voltage and calculate the current
 ina.readShuntVoltage()
 .then(function(){
-  var current = ina.calcCurrent();
+  const current = ina.calcCurrent();
   console.log('Current: ' + current.toFixed(2) + 'A');
 })
 
 // Then read the actual bus voltage and calculate the power
 .then(ina.readBusVoltage.bind(ina))
 .then(function(){
-  var power = ina.calcPower();
+  const power = ina.calcPower();
   console.log('Power: ' + power.toFixed(2) + 'W');
 });

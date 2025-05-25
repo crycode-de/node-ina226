@@ -1,3 +1,9 @@
+# Changelog
+
+## **WORK IN PROGRESS**
+
+- Updated dependencies
+
 ## v3.0.0 2021-02-26
 
 - Updated dependencies

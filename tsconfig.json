@@ -8,6 +8,8 @@
     "removeComments": false,
     "experimentalDecorators": true,
     "sourceMap": true,
+    "strictNullChecks": true,
+    "allowJs": true,
     "outDir": "dist"
   },
   "files": [

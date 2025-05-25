@@ -1,7 +1,7 @@
 /*
  * Node.js module ina226
  *
- * Copyright (c) 2017-2021 Peter Müller <peter@crycode.de> (https://crycode.de/)
+ * Copyright (c) 2017-2025 Peter Müller <peter@crycode.de> (https://crycode.de/)
  *
  * Node.js module to read values from the INA226 bi-directional current and power monitor.
  */
@@ -124,8 +124,8 @@ export class INA226 {
     buf[1] = value & 0xff;
 
     return new Promise<void>((resolve: () => void, reject: (err: Error) => void) => {
-      this._i2cBus.writeI2cBlock(this._address, register, 2, buf, (err: any, _bytesWritten: number, _buffer: Buffer) => {
-        if (err){
+      this._i2cBus.writeI2cBlock(this._address, register, 2, buf, (err: Error, _bytesWritten: number, _buffer: Buffer) => {
+        if (err) {
           reject(err);
         } else {
           resolve();
@@ -144,11 +144,11 @@ export class INA226 {
     const buf = Buffer.alloc(2);
 
     return new Promise<number>((resolve: (bytesWritten: number) => void, reject: (err: Error) => void) => {
-      this._i2cBus.readI2cBlock(this._address, register, 2, buf, (err: any, _bytesRead: number, buffer: Buffer) => {
-        if(err){
+      this._i2cBus.readI2cBlock(this._address, register, 2, buf, (err: Error, _bytesRead: number, buffer: Buffer) => {
+        if (err) {
           reject(err);
-        }else{
-          const value = buffer[0]*256 + buf[1];
+        } else {
+          const value = buffer[0] * 256 + buf[1];
           resolve(value);
         }
       });
@@ -162,10 +162,10 @@ export class INA226 {
    */
   public readBusVoltage (): Promise<number> {
     return this.readRegister(BUS_VOLTAGE_REGISTER)
-    .then<number>((busVoltage: number) => {
-      this._busVoltage = busVoltage * BUS_VOLTAGE_LSB;
-      return this._busVoltage;
-    });
+      .then<number>((busVoltage: number) => {
+        this._busVoltage = busVoltage * BUS_VOLTAGE_LSB;
+        return this._busVoltage;
+      });
   }
 
   /**
@@ -175,20 +175,20 @@ export class INA226 {
    */
   public readShuntVoltage (): Promise<number> {
     return this.readRegister(SHUNT_VOLTAGE_REGISTER)
-    .then<number>((shuntVoltage: number) => {
-      // Negative numbers are represented in two's complement format.
-      // Generate the two's complement of a negative number by complementing
-      // the absolute value binary number and adding 1.
-      // An MSB = '1' denotes a negative number.
-      // (datasheet page 24)
-      if(shuntVoltage & 0x8000){
-        shuntVoltage -= 1; // subtract 1
-        shuntVoltage ^= 0xFFFF; // invert bits
-        shuntVoltage *= -1; // negate
-      }
-      this._shuntVoltage = shuntVoltage * SHUNT_VOLTAGE_LSB;
-      return this._shuntVoltage;
-    });
+      .then<number>((shuntVoltage: number) => {
+        // Negative numbers are represented in two's complement format.
+        // Generate the two's complement of a negative number by complementing
+        // the absolute value binary number and adding 1.
+        // An MSB = '1' denotes a negative number.
+        // (datasheet page 24)
+        if (shuntVoltage & 0x8000) {
+          shuntVoltage -= 1; // subtract 1
+          shuntVoltage ^= 0xFFFF; // invert bits
+          shuntVoltage *= -1; // negate
+        }
+        this._shuntVoltage = shuntVoltage * SHUNT_VOLTAGE_LSB;
+        return this._shuntVoltage;
+      });
   }
 
   /**

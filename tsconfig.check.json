@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "files": [
+    "src/ina226.ts",
+    "eslint.config.mjs",
+    "examples/ina226-example.js",
+    "examples/ina226-example.ts"
+  ]
+}

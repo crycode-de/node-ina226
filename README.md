@@ -16,24 +16,21 @@ For more information about the INA226 please consult the [data sheet from Texas 
 * Read the value from a register.
 * Write a value to a register.
 
-
 ## Installation
 
 Make sure you are using Node.js v8.x or higher.
 
-```
+```sh
 npm install ina226
 ```
 
 This module is written in TypeScript and typings are included.
-
 
 ## Example
 
 Note that you need to construct the [i2c-bus](https://npmjs.org/package/i2c-bus) object and pass it in to the INA226 class.
 
 The example blow can be found in the [examples directory](https://github.com/crycode-de/node-ina226/tree/main/examples) of this package together with a TypeScript example.
-
 
 ```js
 // Require the ina226 module
@@ -83,7 +80,6 @@ ina.readShuntVoltage()
 });
 ```
 
-
 ## API
 
 ### new INA226(i2cBus, address, rShunt)
@@ -103,28 +99,30 @@ Note that you need to construct the [i2c-bus](https://npmjs.org/package/i2c-bus)
 ### writeRegister(register, value)
 
 ```ts
-writeRegister(register:number, value:number):Promise<{}>
+writeRegister(register:number, value:number): Promise<{}>
 ```
 
 Writes a value to a specific register.
 Returns a Promise which will be resolves if the value is written, or rejected in case of an error.
+
 * `register` - The register address.
 * `value` - The value. Should be 16bit integer.
 
 ### readRegister(register)
 
 ```ts
-readRegister(register:number):Promise<number>
+readRegister(register:number): Promise<number>
 ```
 
 Reads a value from a specific register.
 Returns a Promise which will be resolved with the read value, or rejected in case of an error.
+
 * `register` - The register address.
 
 ### readBusVoltage()
 
 ```ts
-readBusVoltage():Promise<number>
+readBusVoltage(): Promise<number>
 ```
 
 Reads the actual bus voltage.
@@ -133,7 +131,7 @@ Returns a Promise which will be resolved with the bus voltage, or rejected in ca
 ### readShuntVoltage()
 
 ```ts
-readShuntVoltage():Promise<number>
+readShuntVoltage(): Promise<number>
 ```
 
 Reads the actual shunt voltage.
@@ -142,19 +140,21 @@ Returns a Promise which will be resolved with the shunt voltage, or rejected in 
 ### calcCurrent(shuntVoltage)
 
 ```ts
-calcCurrent(shuntVoltage?:number):number
+calcCurrent(shuntVoltage?:number): number
 ```
 
 Calculates the current in Ampere based on the shunt voltage an the shunt resistance value.
+
 * `shuntVoltage` - *Optional.* The shunt voltage which is used for the calculation. Defaults to the last read shunt voltage.
 
 ### calcPower(busVoltage, shuntVoltage)
 
 ```ts
-calcPower(busVoltage?:number, shuntVoltage?:number):number
+calcPower(busVoltage?:number, shuntVoltage?:number): number
 ```
 
 Calculates the power in Watt based on the bus voltage, the shunt voltage and the shunt resistance value.
+
 * `busVoltage` - *Optional.* The bus voltage which is used for the calculation. Defaults to the last read bus voltage.
 * `shuntVoltage` - *Optional.* The shunt voltage which is used for the calculation. Defaults to the last read shunt voltage.
 
@@ -175,10 +175,8 @@ The register addresses are exported as constants.
 | MANUFACTOR_ID_REGISTER | 0xFE |
 | DIE_ID_REGISTER | 0xFF |
 
-
-
 ## License
 
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 
-Copyright (c) 2017-2021 Peter Müller <peter@crycode.de> [https://crycode.de/](https://crycode.de/)
+Copyright (c) 2017-2025 Peter Müller <peter@crycode.de> [https://crycode.de/](https://crycode.de/)
